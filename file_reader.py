@@ -19,7 +19,6 @@ number_of_rows = len(csv_rows)
 number_of_columns = len(csv_rows[0])
 print(f'Number of Rows: {number_of_rows}')
 print(f'Number of Columns: {number_of_columns}')
-
 questions = list()
 for question in csv_rows[0][21:number_of_columns]:
     questions.append(question)
