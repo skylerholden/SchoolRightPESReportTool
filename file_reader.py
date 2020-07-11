@@ -1,6 +1,6 @@
 import csv
 
-file_path = "/Users/skylerholden/Downloads/SoGoSurvey_PES-GIS-Hanoi_0620_224-2.csv"
+file_path = "data/PES-Hanoi.csv"
 
 with open(file_path) as csv_file:
     # Open our CSV File
