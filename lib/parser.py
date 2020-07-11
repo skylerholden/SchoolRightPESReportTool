@@ -13,7 +13,7 @@ class Parser:
         self.number_of_columns = 0
         self.questions = list()
         self.responders = list()
-        self.responses_groups = list()
+        self.response_groups = list()
 
         self.questions_starting_column = None
         self.answers_starting_row = 2
@@ -138,7 +138,7 @@ class Parser:
                 target_group_names.append('All Teachers')
 
             # Find the ResponseGroups by name, and add the responder to the group
-            for responder_group in self.responses_groups:
+            for responder_group in self.response_groups:
                 for target_group_name in target_group_names:
                     if target_group_name == responder_group.name:
                         for response in responder.responses:
@@ -150,7 +150,7 @@ class Parser:
         for responder_group_element in self.responder_groups_json:
             responder_group_name = responder_group_element["responder_group_name"]
             new_responder_group = ResponderGroup(responder_group_name)
-            self.responses_groups.append(new_responder_group)
+            self.response_groups.append(new_responder_group)
 
     def _find_first_question(self):
         key_word = 'UNDERSTANDING'
