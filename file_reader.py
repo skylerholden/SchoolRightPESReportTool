@@ -17,7 +17,7 @@ with open(file_path) as csv_file:
 # iterate until we get to a blank.
 number_of_rows = len(csv_rows)
 number_of_columns = len(csv_rows[0])
-print(f'Number of Rows: {number_of_rows}')
+print(f'Number of rows: {number_of_rows}')
 print(f'Number of Columns: {number_of_columns}')
 
 questions = list()
