@@ -1,39 +1,41 @@
 [
   {
-    "responder_group_id": 1,
-    "responder_group_name": "Overall"
+    "responder_group_name": "Parents",
+    "mappings": ["Parent"]
   },
   {
-    "responder_group_id": 2,
-    "responder_group_name": "Parents"
+    "responder_group_name": "Teacher (Elementary School)",
+    "mappings": [
+      "Teachers (ES)",
+      "Teacher (Elementary School)"
+    ]
   },
   {
-    "responder_group_id": 3,
-    "responder_group_name": "Teacher (Elementary School)"
+    "responder_group_name": "Teacher (Middle School)",
+    "mappings": []
   },
   {
-    "responder_group_id": 4,
-    "responder_group_name": "Teacher (Middle School)"
+    "responder_group_name": "Teacher (Secondary School)",
+    "mappings": ["Teacher (Seconday  School)"]
   },
   {
-    "responder_group_id": 5,
-    "responder_group_name": "Teacher (High School)"
+    "responder_group_name": "Teacher (High School)",
+    "mappings": []
   },
   {
-    "responder_group_id": 6,
-    "responder_group_name": "All Teachers"
+    "responder_group_name": "All Teachers",
+    "mappings": []
   },
   {
-    "responder_group_id": 7,
-    "responder_group_name": "Non-Teaching Staff"
+    "responder_group_name": "Non-Teaching Staff",
+    "mappings": ["Non-teaching staff"]
   },
   {
-    "responder_group_id": 8,
-    "responder_group_name": "Administration"
+    "responder_group_name": "Administration",
+    "mappings": ["Administration"]
   },
   {
-    "responder_group_id": 9,
-    "responder_group_name": "All Staff"
+    "responder_group_name": "All Staff",
+    "mappings": []
   }
-
 ]

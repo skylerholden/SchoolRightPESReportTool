@@ -8,10 +8,10 @@ class Response:
 
 class Question:
 
-    def __init__(self, question):
-        self.question = question
+    def __init__(self, question_value):
+        self.value = question_value
 
 class Responder:
 
-    def __init__(self, responder_group_id):
-        pass
+    def __init__(self, responder_group_names):
+        self.group_name = responder_group_names
