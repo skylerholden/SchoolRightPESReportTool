@@ -15,11 +15,12 @@ class Parser:
         self.responders = list()
         self.responses_groups = list()
 
-        self.questions_starting_column = 20
+        self.questions_starting_column = None
         self.answers_starting_row = 2
 
     def parse(self, file_path):
         self.raw_csv = self._extract_csv_rows(file_path)
+        self.questions_starting_column = self._find_first_question()
         self.questions = self._get_questions()
         self.responders = self._get_responders()
         self._build_responder_groups()
@@ -151,4 +152,15 @@ class Parser:
             new_responder_group = ResponderGroup(responder_group_name)
             self.responses_groups.append(new_responder_group)
 
+    def _find_first_question(self):
+        key_word = 'UNDERSTANDING'
+
+        column_number = 0
+        for column in self.raw_csv[0]:
+            if key_word in column:
+                questions_starting_column = column_number
+                break
+            column_number += 1
+
+        return questions_starting_column
 
