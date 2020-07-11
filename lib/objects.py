@@ -2,9 +2,10 @@
 
 class Response:
 
-    def __init__(self, response, question_id ):
+    def __init__(self, response, question):
         self.response = response
-        self.question_id = question_id
+        self.question = question
+
 
 class Question:
 
@@ -15,3 +16,14 @@ class Responder:
 
     def __init__(self, responder_group_name):
         self.group_name = responder_group_name
+        self.responses = list()
+
+    def add_response(self, response, question):
+        """
+
+        :param response: the numeric value of the response
+        :param question: the question object
+        :return:
+        """
+        new_response = Response(response, question)
+        self.responses.append(new_response)
