@@ -1,0 +1,41 @@
+[
+  {
+    "responder_group_name": "Parents",
+    "mappings": ["Parent"]
+  },
+  {
+    "responder_group_name": "Teacher (Elementary School)",
+    "mappings": [
+      "Teachers (ES)",
+      "Teacher (Elementary School)"
+    ]
+  },
+  {
+    "responder_group_name": "Teacher (Middle School)",
+    "mappings": []
+  },
+  {
+    "responder_group_name": "Teacher (Secondary School)",
+    "mappings": ["Teacher (Seconday  School)"]
+  },
+  {
+    "responder_group_name": "Teacher (High School)",
+    "mappings": []
+  },
+  {
+    "responder_group_name": "All Teachers",
+    "mappings": []
+  },
+  {
+    "responder_group_name": "Non-Teaching Staff",
+    "mappings": ["Non-teaching staff"]
+  },
+  {
+    "responder_group_name": "Administration",
+    "mappings": ["Administration"]
+  },
+  {
+    "responder_group_name": "All Staff",
+    "mappings": []
+  }
+]
