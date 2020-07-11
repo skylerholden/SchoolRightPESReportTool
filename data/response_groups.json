@@ -1,5 +1,9 @@
 [
   {
+    "responder_group_name": "Overall",
+    "mappings": []
+  },
+  {
     "responder_group_name": "Parents",
     "mappings": ["Parent"]
   },

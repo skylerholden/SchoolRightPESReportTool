@@ -1,21 +1,19 @@
 import csv
 import json
-from lib.objects import Question, Response, Responder
+from lib.objects import Question, Responder, ResponderGroup
 
 
 class Parser:
 
     def __init__(self):
         self.raw_csv = None
-        self.responder_groups_json_file_path = "data/responder_groups.json"
-        self.responder_groups = self._get_responder_groups()
+        self.responder_groups_json_file_path = "data/response_groups.json"
+        self.responder_groups_json = self._get_responder_groups_json()
         self.number_of_rows = 0
         self.number_of_columns = 0
         self.questions = list()
         self.responders = list()
-        self.all_teachers = list()
-        self.all_staff = list()
-        self.overall = list()
+        self.responses_groups = list()
 
         self.questions_starting_column = 20
         self.answers_starting_row = 2
@@ -24,8 +22,9 @@ class Parser:
         self.raw_csv = self._extract_csv_rows(file_path)
         self.questions = self._get_questions()
         self.responders = self._get_responders()
-        self._categorize_responders()
+        self._build_responder_groups()
         self._get_responses()
+        self._categorize_responses()
 
     def _extract_csv_rows(self, file_path):
         """
@@ -44,11 +43,12 @@ class Parser:
         self.number_of_rows = len(csv_rows)
         return csv_rows
 
-    def _get_responder_groups(self):
+    def _get_responder_groups_json(self):
         """
         Given a file path, return me a list object containing the rows in the csv
         :return: csv_rows
         """
+
         with open(self.responder_groups_json_file_path) as json_file:
             # Open our CSV File
             json_data = json.load(json_file)
@@ -90,10 +90,10 @@ class Parser:
             if raw_responder_group_name == '':
                 # TODO: Raise a more helpful error that provides the location of the missing data
                 raise Exception("You must provide a role.")
-            # compare the raw_responder_type to the mapping in the responder_groups to determine what responder type
-            # this is
+            # compare the raw_responder_type to the mapping in the responder_groups_json to determine what responder
+            # type this is
             responder_group_name = None
-            for json_element in self.responder_groups:
+            for json_element in self.responder_groups_json:
                 if raw_responder_group_name in json_element["mappings"]:
                     responder_group_name = json_element["responder_group_name"]
 
@@ -123,16 +123,32 @@ class Parser:
 
             responder_number += 1
 
-    def _categorize_responders(self):
+    def _categorize_responses(self):
+        # Create the Response Groups
 
         for responder in self.responders:
-            self.overall.append(responder)
+            target_group_names = ['Overall', responder.group_name]
 
             # If the responder is not a parent, add it to the all_staff list
             if responder.group_name != 'Parents':
-                self.all_staff.append(responder)
+                target_group_names.append('All Staff')
 
             if 'Teacher' in responder.group_name:
-                self.all_teachers.append(responder)
+                target_group_names.append('All Teachers')
+
+            # Find the ResponseGroups by name, and add the responder to the group
+            for responder_group in self.responses_groups:
+                for target_group_name in target_group_names:
+                    if target_group_name == responder_group.name:
+                        for response in responder.responses:
+                            responder_group.add_response(response)
+
+    def _build_responder_groups(self):
+
+        # Build the responder groups defined in the JSON file
+        for responder_group_element in self.responder_groups_json:
+            responder_group_name = responder_group_element["responder_group_name"]
+            new_responder_group = ResponderGroup(responder_group_name)
+            self.responses_groups.append(new_responder_group)
 
 

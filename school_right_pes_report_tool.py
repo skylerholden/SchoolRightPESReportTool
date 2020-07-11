@@ -6,9 +6,7 @@ parser = Parser()
 
 parser.parse(file_path)
 
-
-print('Overall:')
-for responder in parser.overall:
-    print(responder.group_name)
-    for response in responder.responses:
-        print(f'{response.question.value}: {response.response}')
+for responder_group in parser.responses_groups:
+    print(responder_group.name)
+    for response in responder_group.responses:
+        print(f'{response.question.value}: {response.answer}')
