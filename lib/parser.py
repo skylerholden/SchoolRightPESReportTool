@@ -20,6 +20,7 @@ class Parser:
         self.raw_csv = self._extract_csv_rows(file_path)
         self.questions = self._get_questions()
         self.responders = self._get_responders()
+        self._categorize_responders()
         self.responses = self._get_responses()
 
     @staticmethod
@@ -87,16 +88,16 @@ class Parser:
                 raise Exception("You must provide a role.")
             # compare the raw_responder_type to the mapping in the responder_groups to determine what responder type
             # this is
-            responder_group_names = list()
+            responder_group_name = None
             for json_element in self.responder_groups:
                 if raw_responder_group_name in json_element["mappings"]:
-                    responder_group_names.append(json_element["responder_group_name"])
+                    responder_group_name = json_element["responder_group_name"]
 
             # If we didn't find a match, that is an error
-            if len(responder_group_names) == 0:
+            if responder_group_name is None:
                 raise Exception(f"'{raw_responder_group_name}' does not map to any group names.")
 
-            new_responder = Responder(responder_group_names)
+            new_responder = Responder(responder_group_name)
             responders.append(new_responder)
 
         return responders
@@ -111,3 +112,17 @@ class Parser:
         responses = list()
 
         return responses
+
+    def _categorize_responders(self):
+
+        for responder in self.responders:
+            self.overall.append(responder)
+
+            # If the responder is not a parent, add it to the all_staff list
+            if responder.group_name != 'Parents':
+                self.all_staff.append(responder)
+
+            if 'Teacher' in responder.group_name:
+                self.all_teachers.append(responder)
+
+

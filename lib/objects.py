@@ -13,5 +13,5 @@ class Question:
 
 class Responder:
 
-    def __init__(self, responder_group_names):
-        self.group_name = responder_group_names
+    def __init__(self, responder_group_name):
+        self.group_name = responder_group_name
